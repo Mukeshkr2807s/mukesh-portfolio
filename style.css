@@ -11,6 +11,11 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -91,7 +96,7 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 20px 80px; /* FIXED: Enough space for fixed navbar */
+    padding: 120px 20px 80px;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
@@ -187,6 +192,7 @@ body {
 /* Sections */
 .section {
     padding: 100px 0;
+    position: relative;
 }
 
 .section-title {
@@ -287,11 +293,12 @@ body {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* Timeline */
+/* Timeline - EXPERIENCE SECTION OPTIMIZED */
 .timeline {
     max-width: 800px;
     margin: 0 auto;
     position: relative;
+    padding: 20px 0;
 }
 
 .timeline::before {
@@ -512,7 +519,7 @@ footer {
     color: white;
 }
 
-/* SINGLE CONSOLIDATED RESPONSIVE SECTION */
+/* MOBILE RESPONSIVE - NO SCROLL VERSION */
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -540,97 +547,139 @@ footer {
         font-weight: 600;
     }
 
-    /* CRITICAL HERO MOBILE FIX */
+    /* HERO - PERFECT MOBILE FIT */
     .hero {
-        flex-direction: column !important;
+        flex-direction: column;
         text-align: center;
-        padding: 140px 15px 80px !important; /* Navbar(70px) + safe space */
-        min-height: auto !important;
+        padding: 110px 15px 60px ;
+        min-height: calc(100vh - 70px);
     }
 
     .hero-content {
         order: 1;
         width: 100%;
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         max-width: 100%;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-desc {
+        font-size: 1rem;
     }
 
     .hero-buttons {
         justify-content: center;
+        gap: 0.8rem;
     }
 
     .hero-image {
         order: 2;
         width: 100%;
-        max-width: 280px;
+        max-width: 240px;
         margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        flex-shrink: 0;
     }
 
     .profile-pic {
         width: 100%;
-        max-width: 280px;
-        height: 280px;
+        max-width: 240px;
+        height: 240px;
         border-radius: 20px;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     }
 
-    /* Container & Section spacing */
+    /* SECTIONS - COMPACT MOBILE */
     .container {
-        padding: 0 15px;
+        padding: 0 12px;
     }
 
     .section {
-        padding: 70px 0;
+        padding: 40px 0 ;
     }
 
-    /* EXPERIENCE SECTION - CRITICAL FIX */
+    /* EXPERIENCE - NO SCROLL FIX */
     #experience {
-        margin-top: 0 !important;
-        padding-top: 50px !important;
+        padding-top: 30px ;
+        padding-bottom: 30px ;
     }
 
-    /* Timeline mobile */
+    .timeline {
+        padding: 10px 0;
+        max-width: 100%;
+    }
+
     .timeline::before {
-        left: 20px;
+        left: 15px;
     }
 
     .timeline-item {
-        flex-direction: column;
-        margin-bottom: 3rem;
+        flex-direction: column ;
+        margin-bottom: 2rem;
     }
 
     .timeline-item:nth-child(odd) {
-        flex-direction: column;
+        flex-direction: column ;
     }
 
     .timeline-icon {
-        left: 20px;
+        left: 15px;
+        top: 0;
     }
 
     .timeline-content {
-        width: 100%;
-        margin-left: 70px;
+        width: 100% ;
+        margin-left: 50px ;
+        padding: 1.2rem ;
+        margin-top: 20px;
     }
 
-    /* Contact */
+    /* OTHER SECTIONS COMPACT */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .education-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
     .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
 
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
     /* Navbar scrolled */
     .navbar-scrolled {
-        background: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(10px);
-        box-shadow: 0 2px 20px rgba(0,0,0,0.1); 
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+}
+
+/* PREVENT MOBILE SCROLLBAR */
+@media (max-width: 768px) {
+    html, body {
+        height: 100vh;
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
+    
+    /* Ensure content fits perfectly */
+    .section {
+        max-height: none;
+        overflow: visible;
     }
 }
 
@@ -651,13 +700,7 @@ footer {
     animation: fadeInUp 0.8s ease forwards;
 }
 
-/* Form states */
 .contact-form button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-}
-
-/* Ensure sections don't overlap */
-section {
-    position: relative;
 }
